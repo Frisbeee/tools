@@ -1,0 +1,32 @@
+import numpy as np
+import sympy as sp
+
+def find_zeros_mod_p(f_expr, p):
+    """
+    Find zeros of a function f in F_p.
+    
+    Parameters:
+    - f_expr: A sympy expression representing f(x).
+    - p: A prime number representing F_p.
+    
+    Returns:
+    - A list of zeros of f(x) in F_p.
+    """
+    x = sp.symbols('x')
+    zeros = []
+    
+    # Iterate over all elements in F_p
+    for value in range(p):
+        if sp.Mod(f_expr.subs(x, value), p) == 0:
+            zeros.append(value)
+    
+    return zeros
+
+# Example function and prime
+x = sp.symbols('x')
+f = x**2 - 1  # Example: f(x) = x^2 - 1
+p = 7  # Example prime field F_p
+
+# Find zeros of f in F_p
+zeros_in_fp = find_zeros_mod_p(f, p)
+print(f"Zeros of f(x) = {f} in F_{p} are: {zeros_in_fp}")
